@@ -4,6 +4,18 @@ import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js'
 import convertToSubCurrency from '../lib/ConvertToSubCurrency'
 
 const CheckoutPage = ({ amount }: { amount: number }) => {
+    console.log(window.location.host)
+
+    const myhost = window.location.host
+    let URL = '';
+
+    if (myhost === 'localhost:3000') {
+        URL = 'http://localhost:3000'
+    }
+    else {
+        URL = 'https://stripe-payment-one-nu.vercel.app';
+    }
+
     const stripe = useStripe()
     const elements = useElements()
 
@@ -46,7 +58,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
             elements,
             clientSecret,
             confirmParams: {
-                return_url: `http://localhost:3000/payment-success?amount=${amount}`
+                return_url: `${URL}/payment-success?amount=${amount}`
             }
         })
 

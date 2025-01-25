@@ -17,10 +17,10 @@ export async function POST(request: NextRequest) {
     }
     catch (err: unknown) {
         if (err instanceof Error) {
-            return {
+            return NextResponse.json({
                 status: 500,
                 body: { error: err.message }
-            }
+            })
         }
     }
 }
